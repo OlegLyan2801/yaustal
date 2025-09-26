@@ -29,4 +29,7 @@ def sozd():
     
 sozd()
 
+
+olija privit
+
 db_connect.close()
