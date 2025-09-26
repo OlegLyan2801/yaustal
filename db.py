@@ -1,6 +1,6 @@
 import sqlite3
 
-db_connect = sqlite3.connect("bdok.db")
+db_connect = sqlite3.connect("reading.db")
 db_cursor = db_connect.cursor()
 
 def sozd():
@@ -16,5 +16,17 @@ def sozd():
                    genre TEXT NOT NULL,
                    total INTEGER NOT NULL CHECK(total >= 1),
                    free INTEGER NOT NULL CHECK(free >= 0 and free <= total))""")
-    db_cursor.execute("""CREATE TABLE """)
+    db_cursor.execute("""CREATE TABLE IF NOT EXISTS loans(
+                       id INTEGER PRIMARY KEY AUTOINCREMENT,
+                       pr TEXT NOT NULL REFERENCES readers(pr),
+                       book_id INTEGER NOT NULL REFERENCES books(id),
+                       date TEXT NOT NULL)""")
+    db_cursor.execute("""CREATE TABLE IF NOT EXISTS holds(
+                       id INTEGER PRIMARY KEY AUTOINCREMENT,
+                       pr TEXT NOT NULL REFERENCES readers(pr),
+                       book_id INTEGER NOT NULL REFERENCES books(id),
+                       date TEXT NOT NULL)""")
     
+sozd()
+
+db_connect.close()
