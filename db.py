@@ -30,6 +30,5 @@ def sozd():
 sozd()
 
 
-olija privit
-sihfhuweihufihuwefhiuweuhifihuwefhiuweiuhfhuiwefhuiwefwrfwefwe
+
 db_connect.close()
