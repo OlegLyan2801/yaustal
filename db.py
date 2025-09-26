@@ -32,4 +32,5 @@ sozd()
 
 olija privit
 sihfhuweihufihuwefhiuweuhifihuwefhiuweiuhfhuiwefhuiwef
+print("penis")
 db_connect.close()
