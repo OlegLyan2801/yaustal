@@ -31,5 +31,5 @@ sozd()
 
 
 olija privit
-
+sihfhuweihufihuwefhiuweuhifihuwefhiuweiuhfhuiwefhuiwef
 db_connect.close()
