@@ -31,6 +31,5 @@ sozd()
 
 
 olija privit
-sihfhuweihufihuwefhiuweuhifihuwefhiuweiuhfhuiwefhuiwef
-print("penis")
+sihfhuweihufihuwefhiuweuhifihuwefhiuweiuhfhuiwefhuiwefwrfwefwe
 db_connect.close()
