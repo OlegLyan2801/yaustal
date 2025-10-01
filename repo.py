@@ -62,3 +62,6 @@ def delete_reader(conn, pr):
     db_cursor.execute("DELETE FROM readers WHERE pr=?", (pr,))
     conn.commit()
     print("Читатель удалён.")
+
+
+#ОЛЕЖА ЕСЛИ ТЫ ЭТО ЧИТАЕШЬ У МЕНЯ ВСЁ ПОЛУЧИЛОСЬ
