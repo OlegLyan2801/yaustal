@@ -3,65 +3,65 @@ def hold_book(conn, pr, title, author, date):
     db_cursor.execute("SELECT id, free FROM books WHERE title=? AND author=?", (title, author))
     book = db_cursor.fetchone()
     if not book or book[1] <= 0:
-        print("Нет свободных экземпляров.")
+        print("нет свободных")
         return
     book_id = book[0]
 
     db_cursor.execute("SELECT COUNT(*) FROM holds WHERE pr=?", (pr,))
     if db_cursor.fetchone()[0] >= 5:
-        print("У читателя уже 5 броней.")
+        print("у читателя уже 5 броней")
         return
 
     db_cursor.execute("INSERT INTO holds (pr, book_id, date) VALUES (?, ?, ?)", (pr, book_id, date))
     db_cursor.execute("UPDATE books SET free=free-1 WHERE id=?", (book_id,))
     conn.commit()
-    print("Книга забронирована.")
+    print("книга забронена")
 
 def unhold_book(conn, pr, title, author):
     db_cursor = conn.cursor()
     db_cursor.execute("SELECT id FROM books WHERE title=? AND author=?", (title, author))
     book = db_cursor.fetchone()
     if not book:
-        print("Книга не найдена.")
+        print("нет такой книги")
         return
     book_id = book[0]
     db_cursor.execute("DELETE FROM holds WHERE pr=? AND book_id=?", (pr, book_id))
     db_cursor.execute("UPDATE books SET free=free+1 WHERE id=?", (book_id,))
     conn.commit()
-    print("Бронь снята.")
+    print("бронь снята")
 
 def loan_book(conn, pr, title, author, date):
     db_cursor = conn.cursor()
     db_cursor.execute("SELECT id, free FROM books WHERE title=? AND author=?", (title, author))
     book = db_cursor.fetchone()
     if not book or book[1] <= 0:
-        print("Нет свободных экземпляров.")
+        print("нет свободных")
         return
     book_id = book[0]
 
     db_cursor.execute("SELECT COUNT(*) FROM loans WHERE pr=?", (pr,))
     if db_cursor.fetchone()[0] >= 5:
-        print("У читателя уже 5 книг.")
+        print("у читателя уже 5 книг")
         return
 
     db_cursor.execute("DELETE FROM holds WHERE pr=? AND book_id=?", (pr, book_id))
     db_cursor.execute("INSERT INTO loans (pr, book_id, date) VALUES (?, ?, ?)", (pr, book_id, date))
     db_cursor.execute("UPDATE books SET free=free-1 WHERE id=?", (book_id,))
     conn.commit()
-    print("Книга выдана.")
+    print("книга выдана")
 
 def return_book(conn, pr, title, author):
     db_cursor = conn.cursor()
     db_cursor.execute("SELECT id FROM books WHERE title=? AND author=?", (title, author))
     book = db_cursor.fetchone()
     if not book:
-        print("Книга не найдена.")
+        print("нет такой книги")
         return
     book_id = book[0]
     db_cursor.execute("DELETE FROM loans WHERE pr=? AND book_id=?", (pr, book_id))
     db_cursor.execute("UPDATE books SET free=free+1 WHERE id=?", (book_id,))
     conn.commit()
-    print("Книга возвращена.")
+    print("книга возвращена")
 
 def get_loans_by_reader(conn, pr):
     db_cursor = conn.cursor()
